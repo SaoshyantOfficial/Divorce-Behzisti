@@ -9,9 +9,15 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 
+"""
+usernames & passwords variables vary from institue to institute
+"""
+
 # Creating parameters for login page
 mainurl = "https://tasmim.behzisti.net/login.aspx"
 target_url = "https://tasmim.behzisti.net/inbox.aspx?free=2"
+
+# TODO clear the hashtags and assign your website username and passwrd insteead , to login into your accout 
 username = "###"
 password = "###"
 username_css_selector = "#tb_name"

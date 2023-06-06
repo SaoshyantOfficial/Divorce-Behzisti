@@ -9,7 +9,7 @@ from bs4 import BeautifulSoup
 import os
 
 """
-usernames & passwords and rounds variables in data_read function vary from institue to institute
+usernames & passwords vary from institue to institute
 """
 
 def update_func():
@@ -88,8 +88,12 @@ def send_info_site():
     # Find and fill in the login form
     username_field = driver.find_element(By.ID, 'tb_name')  
     password_field = driver.find_element(By.ID, 'tb_pass')
-    username_field.send_keys('###')
-    password_field.send_keys('###')
+    
+    # TODO clear the hashtags and assign your website username and passwrd insteead , to login into your accout 
+    username = "###"
+    password = "###"
+    username_field.send_keys(username)
+    password_field.send_keys(password)
 
     # Sending captcha to the site
     captcha_field = driver.find_element(By.ID, "mycapcha_TB_I")

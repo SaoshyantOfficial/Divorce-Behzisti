@@ -15,6 +15,10 @@ from selenium import webdriver
 import time
 import logging
 
+"""
+usernames & passwords variables vary from institue to institute
+"""
+
 WARNING = '\033[93m'
 ENDC = '\033[0m'
 GREEN = '\033[92m'
