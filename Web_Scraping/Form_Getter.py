@@ -31,6 +31,7 @@ class Update():
 
         # Base data frame that their has been collected
         self.df = pd.DataFrame()
+        # If the web scraper code stops in the middle, uncomment the below line and comment the top line (put the correct name for .csv file)
         # self.df = pd.read_csv("Center7_Form_Getter.csv")
         self.form_pazriresh_df = None
         self.form_arzyabi_avalie_df = None
@@ -40,6 +41,7 @@ class Update():
         self.except_list = list()
         self.soup = None
     
+    # collect the text fields content
     def text_field_collector(self, tag):
             try:
                 if tag.has_attr("value"):
@@ -50,7 +52,7 @@ class Update():
             except:
                 return None
 
-
+    # check for which option in select input tag has been chosen
     def check(self, checklist):
             global holder
             holder = None
@@ -106,7 +108,7 @@ class Update():
         # Start the tkinter event loop
         window.mainloop()
 
-
+    # get the form paziresh
     def form_paziresh(self, id):
 
         # Dataset to add data to it by loop
@@ -323,6 +325,7 @@ class Update():
             couple_housing_state = self.check(couple_housing_state_checklist)
 
             #############
+            
             # Second page
             go_to_wife_page_button = driver.find_element(By.ID , 'wizard-t-1')
             go_to_wife_page_button.click()
@@ -558,7 +561,7 @@ class Update():
             logger.exception('exception in form paziresh')
 
 
-
+    # get the form arzyabi avalie
     def form_arzyabi_avalie(self, id):
 
         # Dataset to add data to it by loop
@@ -732,7 +735,7 @@ class Update():
             logger.exception('an exception occurred in form arzyabi avalie')
 
 
-
+    # get the form a
     def form_a(self, id):
 
 
@@ -754,7 +757,6 @@ class Update():
             soup = BeautifulSoup(html_content, "html.parser")
             self.soup = soup
 
-            ###################################
 
             #Part 1
 
@@ -1101,7 +1103,7 @@ class Update():
             logger.exception('exception in form a')
 
 
-
+    # get the form b
     def form_b(self, id):
 
         # Dataset to add data to it by loop
@@ -1121,7 +1123,6 @@ class Update():
             soup = BeautifulSoup(html_content, "html.parser")
             self.soup = soup
 
-            ###################################
 
             #Part 1
 
@@ -1183,7 +1184,10 @@ class Update():
             }
             wife_alchol_consumption = self.check(wife_alchol_consumption_checklist)
 
+
             ###########################
+            
+            
             # Part 2
 
             go_to_part_2_button = driver.find_element(By.ID , 'wizard-t-1')
@@ -1258,6 +1262,7 @@ class Update():
 
 
             ######################################
+
 
             # Part 3
 
@@ -1393,7 +1398,7 @@ class Update():
             logger.exception('exception in form b')
 
 
-
+    # get the form g
     def form_g(self, id):
 
         # Function to check checkboxes
@@ -1410,8 +1415,6 @@ class Update():
 
 
         try:
-
-            #######################################
 
             # First page
             # Getting target's data
@@ -1485,7 +1488,7 @@ class Update():
             wife_police_reference = self.check(wife_police_reference_checklist)
 
 
-            #######################################
+            ################
 
             # Second page
             # Clicking on the next page link
@@ -1574,7 +1577,7 @@ class Update():
             wife_divorce_judicial_action_number_textfield = self.text_field_collector(tag)
 
 
-            #######################################
+            ###############
 
             # Third page
             # Clicking on the next page link
@@ -1768,6 +1771,7 @@ class Update():
         # Loading old exception list to add new exceptions to it
         old_exception_list = np.load("Exception_ids.npy")
 
+        # put your desired name for the file
         ids = np.load('Center7_ID_Getter.npy')
         ids = np.flip(ids)
 
@@ -1792,10 +1796,12 @@ class Update():
                 # Saving data
                 self.df.to_csv("./Center7_Form_Getter.csv", index="False")
                 print(f"{GREEN}The last id that it data has been collected: {counter}{ENDC} \n")
+                
                 # Saving exceptions
                 np.save("Exception_ids.npy",
                 np.concatenate((old_exception_list, np.array(self.except_list))))
 
+            #sleep 120 secods per scraping 50 records to prevent memory leak problem
             if counter % 50 == 0:
                 time.sleep(120)
 
@@ -1808,6 +1814,8 @@ class Update():
 
 # Creating parameters for MainClass
 mainurl = "https://tasmim.behzisti.net/login.aspx"
+
+# TODO clear the hashtags and assign your website username and passwrd insteead , to login into your accout 
 username = "###"
 password = "###"
 username_css_selector = "#tb_name"
